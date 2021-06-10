@@ -1,45 +1,46 @@
 package com.flightbooking.adminservice.service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
-import com.flightbooking.adminservice.model.Admin;
+import com.flightbooking.adminservice.model.Flight;
 import com.flightbooking.adminservice.repository.AdminRepository;
 
-public class AdminServiceImpl implements AdminService {
+@Service
+public class AdminServiceImpl  {
 	
 	@Autowired
 	private AdminRepository repository;
 
-	@Override
-	public Optional<Admin> getById(int id) {
-		return repository.findById(id);
+	public List<Flight> getAllDetails() {
+		List<Flight> flights = new ArrayList<Flight>();
+		repository.findAll().forEach(flights1 -> flights.add(flights1));
+		return flights;
 	}
 
-	@Override
-	public List<Admin> getAllAdmins() {
+	public void addFlights(Flight flights) {
+		repository.save(flights);
 		
-		return repository.findAll();
 	}
 
-	@Override
-	public Admin addNewFlight(Admin admin) {
+	public Flight getDetailsByFlightnumber(String flightnumber) {
+		return repository.findByFlightnumber(flightnumber);
+	}
+
+
+	public ResponseEntity<Flight> deleteFlights(String flightnumber) {
+		Flight existingDetails=repository.findByFlightnumber(flightnumber);
+		repository.delete(existingDetails);
+		return ResponseEntity.ok().build();
+		}
+
+	public void saveFlights(Flight flights) {
+		repository.save(flights);
 		
-		return repository.save(admin);
 	}
-
-	@Override
-	public Admin updateFlight(Admin admin) {
-		
-		return repository.save(admin);
-	}
-
-	@Override
-	public Admin deleteById(int id) {
-		
-		return repository.deleteById(id);
-	}
-
 }

@@ -1,9 +1,9 @@
 package com.flightbooking.adminservice.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,44 +13,56 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.flightbooking.adminservice.model.Admin;
-import com.flightbooking.adminservice.repository.AdminRepository;
 
+import com.flightbooking.adminservice.model.Flight;
+import com.flightbooking.adminservice.service.AdminServiceImpl;
 
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
 	
+	
 	@Autowired
-	private AdminRepository repository;
-		
+	private AdminServiceImpl adminServiceImpl;
 	
-	@PostMapping("/addAdmin")
-	public String saveAdmins(@RequestBody Admin admin) {
-		repository.save(admin);
-		return "added admin with id:" + admin.getId();
+	@GetMapping("/all")
+	public List<Flight> getAllDetails() {
+		return adminServiceImpl.getAllDetails();
 	}
 	
-	@GetMapping("/findAllAdmin")
-	public List<Admin> getAdmins(){
-		return repository.findAll();
+	@GetMapping("/{flightnumber}")
+	public Flight getDetailsByFlightnumber(@PathVariable String flightnumber) 
+	{
+		return adminServiceImpl.getDetailsByFlightnumber(flightnumber);
 	}
 	
-	@GetMapping("/findAllAdmin/{id}")
-	public Optional<Admin> getAdmins(@PathVariable int id){
-		return repository.findById(id);
+	@PostMapping("/add")
+	public String addFlight(@RequestBody Flight flights) {
+		adminServiceImpl.addFlights(flights);
+		return ("Added flight details with flight number - " + flights.getFlightnumber() + " successfully..!!");
 	}
 	
-	@DeleteMapping("/delete/{id}")
-	public String deleteAdmins(@PathVariable int id) {
-		repository.deleteById(id);
-		return "admin deleted with id:"+id;
+	@DeleteMapping("/delete/{flightnumber}")
+	public ResponseEntity<Flight> deleteFlightsDetails(@PathVariable String flightnumber)
+	{
+		return adminServiceImpl.deleteFlights(flightnumber);
 	}
 	
-	@PutMapping("/update/{id}")
-	public Admin updateAdmins(@PathVariable int id, @RequestBody Admin admin) {
-		admin.setId(id);
-		repository.save(admin);
-		return admin;
+	@PutMapping("/update/{flightnumber}")
+	public Flight updateFlightsDetails(@PathVariable String flightnumber, @RequestBody Flight flights)
+	{
+		flights.setFlightnumber(flightnumber);
+	    adminServiceImpl.saveFlights(flights);
+	    return flights;
 	}
+	
+	
+//	@Autowired
+//	private PassengerRepo repo;
+//	
+//	@GetMapping("/allpassenger")
+//	public List<Passenger> getAllPassenger() {
+//		return repo.getAllPassenger();
+//	}
+	
 }
