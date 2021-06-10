@@ -8,9 +8,8 @@ import com.flightbookingsystem.passengerservice.model.Passenger;
 
 public interface PassengerRepository extends MongoRepository<Passenger,String> {
 
-	void deleteByAge(int age);
-	Optional<Passenger> findByAge(int age);
-
+	Optional<Passenger> findById(int id);
+	Passenger deleteById(int id);
 	
 	
 

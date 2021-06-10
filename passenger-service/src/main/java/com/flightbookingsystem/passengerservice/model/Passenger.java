@@ -17,16 +17,33 @@ public class Passenger {
 	private int age;
 	private String gender;
 	private Object address;
-	private int user_id;
+	private int id;
 	
-
-
-	public int getUser_id() {
-		return user_id;
+	public Passenger(){
+		 
+	}
+	
+	public Passenger(String _id, String name, String username, String password, String email, int age, String gender,
+			Object address, int id) {
+		super();
+		this._id = _id;
+		this.name = name;
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.age = age;
+		this.gender = gender;
+		this.address = address;
+		this.id = id;
 	}
 
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String get_id() {

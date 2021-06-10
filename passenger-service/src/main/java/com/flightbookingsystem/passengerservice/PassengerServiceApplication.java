@@ -5,9 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
-@SpringBootApplication(scanBasePackages = "Resources")
+@SpringBootApplication
 @EnableEurekaClient
-@EnableMongoRepositories(basePackages = "com.flightbookingsystem.passengerservice.repository")
+@EnableMongoRepositories
 public class PassengerServiceApplication {
 	
 	 
