@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.flightbookingsystem.flightservice.model.Flight;
 import com.flightbookingsystem.flightservice.repository.FlightRepository;
@@ -29,7 +30,7 @@ public class FlightController {
 	@PostMapping("/addFlight")
 	public String saveFlight(@RequestBody Flight flight) {
 		flightRepository.save(flight);
-		return "Added Flight with id:" + flight.getFlightid();
+		return "Added Flight with id:" + flight.getFlightnumber();
 	}
 	
 	@GetMapping("/findAllFlight")
@@ -37,20 +38,20 @@ public class FlightController {
 		return flightRepository.findAll();
 	}
 	
-	@GetMapping("/findAllFlight/{flightid}")
-	public Optional<Flight> getFlight(@PathVariable int flightid){
-		return flightRepository.findByFlightid(flightid);
+	@GetMapping("/findAllFlight/{flightnumber}")
+	public Optional<Flight> getFlight(@PathVariable String flightnumber){
+		return flightRepository.findByFlightnumber(flightnumber);
 	}
 	
-	@DeleteMapping("/delete/{flightid}")
-	public String deleteFlight(@PathVariable int flightid) {
-		flightRepository.deleteByFlightid(flightid);
-		return "Flight deleted with id:"+flightid;
+	@DeleteMapping("/delete/{flightnumber}")
+	public String deleteFlight(@PathVariable String flightnumber) {
+		flightRepository.deleteByFlightnumber(flightnumber);
+		return "Flight deleted with id:"+flightnumber;
 	}
 	
-	@PutMapping("/update/{flightid}")
-	public Flight updateFlight(@PathVariable int flightid, @RequestBody Flight flight) {
-		flight.setFlightid(flightid);
+	@PutMapping("/update/{flightnumber}")
+	public Flight updateFlight(@PathVariable String flightnumber, @RequestBody Flight flight) {
+		flight.setFlightnumber(flightnumber);
 		flightRepository.save(flight);
 		return flight;
 	}

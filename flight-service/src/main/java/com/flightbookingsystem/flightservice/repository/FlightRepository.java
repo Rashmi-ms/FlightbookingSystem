@@ -11,9 +11,9 @@ import com.flightbookingsystem.flightservice.model.Flight;
 @Repository
 public interface FlightRepository extends MongoRepository<Flight,String> {
 
-	
-	Flight deleteByFlightid(int flightid);
-	Optional<Flight> findByFlightid(int flightid);
+
+	Optional<Flight> findByFlightnumber(String flightnumber);
+	Flight deleteByFlightnumber(String flightnumber);
 	
 	
 

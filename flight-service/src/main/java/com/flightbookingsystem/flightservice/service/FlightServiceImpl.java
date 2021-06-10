@@ -14,8 +14,8 @@ public class FlightServiceImpl implements FlightService{
 	private FlightRepository flightRepository;
 
 	@Override
-	public Optional<Flight> getByFlightId(int flightid) {
-		return flightRepository.findByFlightid(flightid);
+	public Optional<Flight> getByFlightId(String flightnumber) {
+		return flightRepository.findByFlightnumber(flightnumber);
 	}
 
 	@Override
@@ -35,9 +35,10 @@ public class FlightServiceImpl implements FlightService{
 	}
 
 	@Override
-	public Flight deleteFlightById(int flightid) {
-		return flightRepository.deleteByFlightid(flightid);
+	public Flight deleteFlightById(String flightnumber) {
+		return flightRepository.deleteByFlightnumber(flightnumber);
 	}
+
 
 
 }

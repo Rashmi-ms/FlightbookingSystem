@@ -7,7 +7,7 @@ import com.flightbookingsystem.flightservice.model.Flight;
 
 public interface FlightService {
 	
-	Optional<Flight> getByFlightId(int flightid);
+	Optional<Flight> getByFlightId(String flightnumber);
 
 	List<Flight> getAllFlights();
 	
@@ -15,7 +15,7 @@ public interface FlightService {
 
 	Flight updateFlight(Flight flight);
 
-	Flight deleteFlightById(int flightid);
+	Flight deleteFlightById(String flightnumber);
 
 }
 
