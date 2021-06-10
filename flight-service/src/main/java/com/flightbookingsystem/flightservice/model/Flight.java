@@ -9,7 +9,7 @@ public class Flight {
 	@Id
 	private String _id;
 	
-	private int flightid;
+	private String flightnumber;
 	private String flight_name;
 	private String source;
 	private String destination;
@@ -22,11 +22,11 @@ public class Flight {
 	}
 	
 	
-	public Flight(String _id, int flightid, String flight_name, String source, String destination,
+	public Flight(String _id, String flightnumber, String flight_name, String source, String destination,
 			String departure_time, String arrival_time, int flight_fare) {
 		super();
 		this._id = _id;
-		this.flightid = flightid;
+		this.flightnumber = flightnumber;
 		this.flight_name = flight_name;
 		this.source = source;
 		this.destination = destination;
@@ -45,14 +45,16 @@ public class Flight {
 		this._id = _id;
 	}
 	
-	public int getFlightid() {
-		return flightid;
+	public String getFlightnumber() {
+		return flightnumber;
 	}
 
 
-	public void setFlightid(int flightid) {
-		this.flightid = flightid;
+	public void setFlightnumber(String flightnumber) {
+		this.flightnumber = flightnumber;
 	}
+	
+	
 
 	public String getFlight_name() {
 		return flight_name;
