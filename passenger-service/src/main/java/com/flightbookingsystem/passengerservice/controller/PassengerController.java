@@ -13,54 +13,58 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
-
+import com.flightbookingsystem.passengerservice.model.Flight;
 import com.flightbookingsystem.passengerservice.model.Passenger;
 import com.flightbookingsystem.passengerservice.repository.PassengerRepository;
-
 
 
 @RestController
 @RequestMapping("/Passenger")
 public class PassengerController {
 	
+	
 	@Autowired
-	private PassengerRepository repo;
+    private RestTemplate restTemplate;
 	
-	@PostMapping("/addPassenger")
-	public String savePassenger(@RequestBody Passenger passenger) {
-		repo.save(passenger);
-		return "added passenger with id:" + passenger.getId();
-	}
-	
-	
-	
-	@GetMapping("/findAllPassenger")
-	public List<Passenger> getPassenger(){
-		return repo.findAll();
-	}
-	
-	
-	
-	  @GetMapping("/findAllPassenger/{id}")
-	  public Optional<Passenger>getPassenger(@PathVariable int id){ 
-		  return repo.findById(id);
-		  }
-	 
+	 @RequestMapping("/{flightnumber}")
+	 public String getFlight(@PathVariable("flightnumber") String flightnumber) {
 
-	
-	@DeleteMapping("/delete/{id}")
-	public String deletePassenger(@PathVariable int id) {
-		repo.deleteById(id);
-		return "Passenger deleted with id:"+id;
-	}
-	
-	@PutMapping("/update/{age}")
-	public Passenger updatePassenger(@PathVariable int age, @RequestBody Passenger passenger) {
-		passenger.setAge(age);
-		repo.save(passenger);
-		return passenger;
-	}
+	 Flight flight = restTemplate.getForObject("http://localhost:8082/flight/findAllFlight/" + flightnumber, Flight.class);
+
+	  return flight.getFlight_name();
+	        }
+	 
+	 
+	         //CURD operation 
+			/*
+			 * @Autowired private PassengerRepository repo;
+			 * 
+			 * @PostMapping("/addPassenger") public String savePassenger(@RequestBody
+			 * Passenger passenger) { repo.save(passenger); return
+			 * "added passenger with id:" + passenger.getId(); }
+			 * 
+			 * 
+			 * 
+			 * @GetMapping("/findAllPassenger") public List<Passenger> getPassenger(){
+			 * return repo.findAll(); }
+			 * 
+			 * 
+			 * 
+			 * @GetMapping("/findAllPassenger/{id}") public
+			 * Optional<Passenger>getPassenger(@PathVariable int id){ return
+			 * repo.findById(id); }
+			 * 
+			 * 
+			 * 
+			 * @DeleteMapping("/delete/{id}") public String deletePassenger(@PathVariable
+			 * int id) { repo.deleteById(id); return "Passenger deleted with id:"+id; }
+			 * 
+			 * @PutMapping("/update/{age}") public Passenger updatePassenger(@PathVariable
+			 * int age, @RequestBody Passenger passenger) { passenger.setAge(age);
+			 * repo.save(passenger); return passenger; }
+			 */
 	
 	
 	 
