@@ -3,18 +3,17 @@ package com.flightbooking.adminservice.repository;
 
 
 
+import java.util.Optional;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
-
-import com.flightbooking.adminservice.model.Flight;
+import com.flightbooking.adminservice.model.Admin;
 
 
 @Repository
-public interface AdminRepository extends MongoRepository<Flight,String>  {
+public interface AdminRepository extends MongoRepository<Admin,String>  {
 
-	Flight findByFlightnumber(String flightnumber);
-
-	
+	Optional<Admin> findById(int id);
 
 }

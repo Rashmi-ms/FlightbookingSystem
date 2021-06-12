@@ -9,13 +9,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.flightbooking.adminservice.model.Flight;
-import com.flightbooking.adminservice.repository.AdminRepository;
+import com.flightbooking.adminservice.repository.FlightRepository;
 
 @Service
 public class AdminServiceImpl  {
 	
 	@Autowired
-	private AdminRepository repository;
+	private FlightRepository repository;
 
 	public List<Flight> getAllDetails() {
 		List<Flight> flights = new ArrayList<Flight>();
