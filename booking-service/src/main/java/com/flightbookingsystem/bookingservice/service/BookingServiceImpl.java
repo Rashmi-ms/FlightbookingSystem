@@ -11,12 +11,12 @@ import com.flightbookingsystem.bookingservice.repository.BookingRepository;
 public class BookingServiceImpl implements BookingService  {
 	
 	@Autowired
-	BookingRepository bookingRepo;
+	private BookingRepository bookingRepo;
 
 	@Override
-	public Optional<Booking> getById(int id) {
+	public Optional<Booking> getById(int bookingid) {
 		
-		return bookingRepo.findById(id);
+		return bookingRepo.findByBookingid(bookingid);
 	}
 
 	@Override
@@ -38,9 +38,9 @@ public class BookingServiceImpl implements BookingService  {
 	}
 
 	@Override
-	public Booking deleteById(int id) {
+	public Booking deleteById(int bookingid) {
 		
-		return bookingRepo.deleteById(id);
+		return bookingRepo.deleteByBookingid(bookingid);
 	}
 
 }

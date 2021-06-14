@@ -1,4 +1,4 @@
-package com.flightbookingsystem.bookingservice.model;
+package com.flightbookingsystem.passengerservice.model;
 
 import java.util.Date;
 

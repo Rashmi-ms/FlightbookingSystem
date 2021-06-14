@@ -12,12 +12,9 @@ import com.flightbookingsystem.bookingservice.model.Booking;
 @Repository
 public interface BookingRepository extends MongoRepository<Booking, String>{
 
-	Optional<Booking> findById(int id);
+	Optional<Booking> findByBookingid(int bookingid);
 
-	Booking deleteById(int id);
-
-	
-
+	Booking deleteByBookingid(int bookingid);
 	
 
 }
