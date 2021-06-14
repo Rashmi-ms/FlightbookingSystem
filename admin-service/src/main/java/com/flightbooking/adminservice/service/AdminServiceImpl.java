@@ -28,16 +28,15 @@ public class AdminServiceImpl  {
 		
 	}
 
-	public Flight getDetailsByFlightnumber(String flightnumber) {
-		return repository.findByFlightnumber(flightnumber);
-	}
-
-
-	public ResponseEntity<Flight> deleteFlights(String flightnumber) {
-		Flight existingDetails=repository.findByFlightnumber(flightnumber);
-		repository.delete(existingDetails);
-		return ResponseEntity.ok().build();
-		}
+	/*
+	 * public Flight getDetailsByFlightnumber(String flightnumber) { return
+	 * repository.findByFlightnumber(flightnumber); }
+	 * 
+	 * 
+	 * public ResponseEntity<Flight> deleteFlights(String flightnumber) { Flight
+	 * existingDetails=repository.findByFlightnumber(flightnumber);
+	 * repository.delete(existingDetails); return ResponseEntity.ok().build(); }
+	 */
 
 	public void saveFlights(Flight flights) {
 		repository.save(flights);

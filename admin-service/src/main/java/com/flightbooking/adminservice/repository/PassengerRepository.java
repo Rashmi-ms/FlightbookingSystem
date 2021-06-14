@@ -13,10 +13,6 @@ import com.flightbooking.adminservice.model.Passenger;
 public interface PassengerRepository extends MongoRepository<Passenger,String> {
 
 	List<Passenger> findById(int id);
-
-	void deleteById(int id);
-
-	
 	
 	
 
