@@ -21,12 +21,12 @@ import com.flightbookingsystem.bookingservice.repository.BookingRepository;
 public class BookingController {
 	
 	@Autowired
-	BookingRepository bookingRepo;
+	private BookingRepository bookingRepo;
 	
 	@PostMapping("/addbooking")
 	public String saveBooking(@RequestBody Booking booking) {
 		bookingRepo.save(booking);
-		return "Added booking with id:" + booking.getId();
+		return "Added booking with id:" + booking.getBookingid();
 	}
 	
 	@GetMapping("/findAllBooking")
@@ -34,29 +34,23 @@ public class BookingController {
 		return bookingRepo.findAll();
 	}
 	
-	@GetMapping("/findAllBooking/{id}")
-	public Optional<Booking> getBooking(@PathVariable int id){
-		return bookingRepo.findById(id);
+	@GetMapping("/findAllBooking/{bookingid}")
+	public Optional<Booking> getBooking(@PathVariable int bookingid){
+		return bookingRepo.findByBookingid(bookingid);
 	}
 	
-	@DeleteMapping("/delete/{id}")
-	public String deleteBooking(@PathVariable int id) {
-		bookingRepo.deleteById(id);
-		return "booking deleted with id:"+id;
+	@DeleteMapping("/delete/{bookingid}")
+	public String deleteBooking(@PathVariable int bookingid) {
+		bookingRepo.deleteByBookingid(bookingid);
+		return "booking deleted with id:"+bookingid;
 	}
 	
-	@PutMapping("/update/{id}")
-	public Booking updateBooking(@PathVariable int id, @RequestBody Booking booking) {
-		booking.setId(id);
+	@PutMapping("/update/{bookingid}")
+	public Booking updateBooking(@PathVariable int bookingid, @RequestBody Booking booking) {
+		booking.setBookingid(bookingid);
 		bookingRepo.save(booking);
 		return booking;
 	}
-	
-	
-	
-	
-	
-	
-	
+		
 
 }

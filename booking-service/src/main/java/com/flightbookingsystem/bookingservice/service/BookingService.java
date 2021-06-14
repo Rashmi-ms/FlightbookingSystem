@@ -8,7 +8,7 @@ import com.flightbookingsystem.bookingservice.model.Booking;
 
 public interface BookingService {
 	
-	Optional<Booking> getById(int id);
+	Optional<Booking> getById(int bookingid);
 
 	List<Booking> getAllBooking();
 	
@@ -16,6 +16,6 @@ public interface BookingService {
 
 	Booking updateBooking(Booking booking);
 
-	Booking deleteById(int id);
+	Booking deleteById(int bookingid);
 
 }
