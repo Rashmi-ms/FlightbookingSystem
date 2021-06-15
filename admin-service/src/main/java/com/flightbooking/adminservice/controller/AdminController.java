@@ -67,17 +67,6 @@ public class AdminController {
 	 return response.getBody();
 	        }
 	         
-	 //adds new passenger
-	  @RequestMapping(value = "/addPassenger",method = RequestMethod.POST)
-	     public String addNewPassenger(@RequestBody  Passenger passenger)
-	     {
-	         HttpHeaders headers = new HttpHeaders();
-	         headers.setContentType(MediaType.APPLICATION_JSON);
-	         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-	         HttpEntity<Passenger> entity = new  HttpEntity<Passenger>(passenger,headers);
-	         return restTemplate.exchange("http://localhost:8081/Passenger/addPassenger", HttpMethod.POST, entity, String.class).getBody();
-
-	     }
 	  //delete passenger with the given id
 	  @RequestMapping(value = "/delete/{id}",method = RequestMethod.DELETE)
 	     public String deletePassenger(@PathVariable("id") int id)
@@ -169,7 +158,7 @@ public class AdminController {
 	 @RequestMapping(value = "/findAllBooking/{bookingid}", method = RequestMethod.GET)
 	 public List<Booking> getBooking(@PathVariable("bookingid") int bookingid) {
 	 restTemplate.getForObject("http://localhost:8083/booking/findAllBooking/" + bookingid, Booking.class);
-	 return bookrepo.findByBookingId(bookingid);
+	 return bookrepo.findByBookingid(bookingid);
 	        }
 	 
 	//update booking with the  bookingid

@@ -16,7 +16,7 @@ import com.flightbooking.adminservice.model.Booking;
 @Repository
 public interface BookingRepository extends MongoRepository<Booking, String>{
 
-	List<Booking> findByBookingId(int bookingid);
+	List<Booking> findByBookingid(int bookingid);
 
 	
 
