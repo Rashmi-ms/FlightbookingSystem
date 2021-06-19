@@ -16,6 +16,8 @@ public class Flight {
 	private String departure_time;
 	private String arrival_time;
 	private int flight_fare;
+	private String dateoftravel;
+	private int totalseats;
 	
 	public Flight() {
 		
@@ -23,7 +25,7 @@ public class Flight {
 	
 	
 	public Flight(String _id, String flightnumber, String flight_name, String source, String destination,
-			String departure_time, String arrival_time, int flight_fare) {
+			String departure_time, String arrival_time, int flight_fare, String dateoftravel, int totalseats) {
 		super();
 		this._id = _id;
 		this.flightnumber = flightnumber;
@@ -33,6 +35,8 @@ public class Flight {
 		this.departure_time = departure_time;
 		this.arrival_time = arrival_time;
 		this.flight_fare = flight_fare;
+		this.dateoftravel = dateoftravel;
+		this.totalseats  = totalseats;
 	}
 
 
@@ -113,6 +117,26 @@ public class Flight {
 
 	public void setFlight_fare(int flight_fare) {
 		this.flight_fare = flight_fare;
+	}
+
+
+	public String getDateoftravel() {
+		return dateoftravel;
+	}
+
+
+	public void setDateoftravel(String dateoftravel) {
+		this.dateoftravel = dateoftravel;
+	}
+
+
+	public int getTotalseats() {
+		return totalseats;
+	}
+
+
+	public void setTotalseats(int totalseats) {
+		this.totalseats = totalseats;
 	}
 
 
