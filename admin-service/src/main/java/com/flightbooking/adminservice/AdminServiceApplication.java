@@ -8,7 +8,6 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
-import com.flightbooking.adminservice.service.AdminServiceImpl;
 
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -17,7 +16,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@SpringBootApplication(scanBasePackages = {"com.flightbooking.adminservice.controller"})
+@SpringBootApplication
 @EnableEurekaClient
 @EnableSwagger2
 public class AdminServiceApplication {
@@ -44,12 +43,7 @@ public class AdminServiceApplication {
 			new springfox.documentation.service.Contact(null, null, null),
 			null,null,Collections.emptyList());
     }
-			
 	
-	@Bean
-	public AdminServiceImpl getAdminServiceImpl () {
-		return new AdminServiceImpl();
-	}
 	
 	
 	public static void main(String[] args) {

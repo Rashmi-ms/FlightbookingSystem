@@ -25,17 +25,12 @@ import org.springframework.web.client.RestTemplate;
 import com.flightbookingsystem.passengerservice.model.Booking;
 import com.flightbookingsystem.passengerservice.model.Flight;
 import com.flightbookingsystem.passengerservice.model.Passenger;
-import com.flightbookingsystem.passengerservice.repository.BookingRepository;
-import com.flightbookingsystem.passengerservice.repository.FlightRepository;
 import com.flightbookingsystem.passengerservice.repository.PassengerRepository;
 
 
 @RestController
 @RequestMapping("/Passenger")
 public class PassengerController {
-	
-	@Autowired 
-	private FlightRepository repository;
 	
 	
 	@Autowired
@@ -50,15 +45,16 @@ public class PassengerController {
 	 
 	//returns flight of the given flightnumber
 	 @RequestMapping(value="/findAllFlight/{flightnumber}",method = RequestMethod.GET)
-	 public List<Flight> getFlight(@PathVariable("flightnumber") String flightnumber) {
-	 restTemplate.getForObject("http://localhost:8082/flight/findAllFlight/" + flightnumber, Flight.class);
-	 return repository.findByFlightnumber(flightnumber);
-	 }
+	 public String getFlight(@PathVariable("flightnumber") String flightnumber) {
+	     
+	         HttpHeaders headers = new HttpHeaders();
+	         headers.setContentType(MediaType.APPLICATION_JSON);
+	         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+	         HttpEntity<Flight> entity = new  HttpEntity<Flight>(headers);
+	         return restTemplate.exchange("http://localhost:8082/flight/findAllFlight/" + flightnumber, HttpMethod.GET, entity, String.class).getBody();
+
+	     }
 	
-		 
-		 
-    @Autowired
-   	private BookingRepository repos;
     
   //add new booking
 	  @RequestMapping(value = "/addbooking",method = RequestMethod.POST)
@@ -92,6 +88,26 @@ public class PassengerController {
 	         HttpEntity<Booking> entity = new  HttpEntity<Booking>(headers);
 	         return restTemplate.exchange("http://localhost:8083/booking/delete/"+ bookingid, HttpMethod.DELETE, entity, String.class).getBody();
 	     }
+	  
+	//return booking with bookingid
+		 @RequestMapping(value = "/findAllBooking/{bookingid}", method = RequestMethod.GET)
+		 public String getBooking(@PathVariable("bookingid") int bookingid) {
+		     
+		         HttpHeaders headers = new HttpHeaders();
+		         headers.setContentType(MediaType.APPLICATION_JSON);
+		         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+		         HttpEntity<Booking> entity = new  HttpEntity<Booking>(headers);
+		         return restTemplate.exchange("http://localhost:8083/booking/findAllBooking/" + bookingid, HttpMethod.GET, entity, String.class).getBody();
+
+		     }
+	  
+	  
+	//returns booking status
+//		 @RequestMapping(value="/checkin/get/{bookingid}",method = RequestMethod.GET)
+//		 public List<Booking> getBooking(@PathVariable("bookingid") int bookingid) {
+//		 restTemplate.getForObject("http://localhost:8089/checkin/get/" + bookingid, Booking.class);
+//		 return repos.findByBookingid(bookingid);
+//		 }
 		 	 
 //CURD operation 
 			
