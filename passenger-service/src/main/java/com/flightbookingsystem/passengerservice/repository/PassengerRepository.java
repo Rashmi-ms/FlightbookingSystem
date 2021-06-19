@@ -10,6 +10,7 @@ public interface PassengerRepository extends MongoRepository<Passenger,String> {
 
 	Optional<Passenger> findById(int id);
 	Passenger deleteById(int id);
+	Passenger findByUsername(String username);
 	
 	
 
